@@ -1,0 +1,22 @@
+@import './base.css';
+
+#app {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+.Main{
+    display: flex;
+}
+/*给mainCard制作一个投影，鼠标放上去之后*/
+.mainCard{
+    margin: 20px;
+    width: 5cm;
+    height: 6cm;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    transition: all .3s;
+}
+.mainCard:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
+
