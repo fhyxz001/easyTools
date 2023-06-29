@@ -4,6 +4,8 @@ package easy.easytools.Service;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import easy.easytools.Entity.*;
@@ -15,6 +17,9 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -28,29 +33,53 @@ public class BBSToolsServiceImpl implements BBSToolsService {
     String newTitle = "";
     String content = "";
 
+    @Autowired
+    HttpServletRequest httpServletRequest;
+    @Autowired
+    ApiLogsService apiLogsService;
     @Override
     public News getNewsByUrl(String url) {
-        Document doc = this.getDocument(url);
+        LocalDateTime startTime = LocalDateTime.now();
+        //获取调用接口人的ip地址
+        String ip = httpServletRequest.getRemoteAddr();
+        log.info("调用接口人ip地址为：{}",ip);
+        ApiLogs apiLogs = new ApiLogs();
+        apiLogs.setCallerIp(ip);
+        apiLogs.setInterfaceName("bbs/getNewsByUrl");
+        apiLogs.setCallTime(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        apiLogs.setRequestParams(url);
         News news = new News();
-        String code = this.SiteCheck(url);
-        if(code!=null){
-            news.setSiteType(code);
+        //开始处理数据
+        try{
+            Document doc = this.getDocument(url);
+            String code = this.SiteCheck(url);
+            if(code!=null){
+                news.setSiteType(code);
+            }
+            NewsSources newsSources = NewsSources.getNewsSourcesByCode(news.getSiteType());
+            switch (newsSources.getNewsParseType()){
+                case "0":
+                    traditionalWebHandle(newsSources, doc, url, news);
+                    break;
+                case "1":
+                    interfaceWebHandle(newsSources,url,news);
+                    break;
+                case "2":
+                    bbsWebHandle(newsSources,doc,news,url);
+                    break;
+                default:
+                    throw new IllegalArgumentException("网站类型不合法");
+            }
+        }catch (Exception e){
+            apiLogs.setResponseData("-1");
+            apiLogs.setExceptionMessage(e.getMessage());
         }
-        NewsSources newsSources = NewsSources.getNewsSourcesByCode(news.getSiteType());
-        switch (newsSources.getNewsParseType()){
-            case "0":
-                traditionalWebHandle(newsSources, doc, url, news);
-                break;
-            case "1":
-                interfaceWebHandle(newsSources,url,news);
-                break;
-            case "2":
-                bbsWebHandle(newsSources,doc,news,url);
-                break;
-            default:
-                throw new IllegalArgumentException("网站类型不合法");
-        }
-
+        apiLogs.setResponseData(JSONUtil.toJsonStr(news));
+        //获取执行时间
+        LocalDateTime endTime = LocalDateTime.now();
+        apiLogs.setExecutionTime(endTime.minusNanos(startTime.getNano()).getNano());
+        apiLogs.setCreatedAt(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        apiLogsService.saveApiLogs(apiLogs);
         return news;
     }
 
