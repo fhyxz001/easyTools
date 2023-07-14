@@ -42,12 +42,11 @@ public class BBSToolsServiceImpl implements BBSToolsService {
         LocalDateTime startTime = LocalDateTime.now();
         //获取调用接口人的ip地址
         String ip = httpServletRequest.getRemoteAddr();
-        log.info("调用接口人ip地址为：{}",ip);
-        ApiLogs apiLogs = new ApiLogs();
-        apiLogs.setCallerIp(ip);
-        apiLogs.setInterfaceName("bbs/getNewsByUrl");
-        apiLogs.setCallTime(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        apiLogs.setRequestParams(url);
+//        ApiLogs apiLogs = new ApiLogs();
+//        apiLogs.setCallerIp(ip);
+//        apiLogs.setInterfaceName("bbs/getNewsByUrl");
+//        apiLogs.setCallTime(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//        apiLogs.setRequestParams(url);
         News news = new News();
         //开始处理数据
         try{
@@ -71,15 +70,15 @@ public class BBSToolsServiceImpl implements BBSToolsService {
                     throw new IllegalArgumentException("网站类型不合法");
             }
         }catch (Exception e){
-            apiLogs.setResponseData("-1");
-            apiLogs.setExceptionMessage(e.getMessage());
+//            apiLogs.setResponseData("-1");
+//            apiLogs.setExceptionMessage(e.getMessage());
         }
-        apiLogs.setResponseData(JSONUtil.toJsonStr(news));
+//        apiLogs.setResponseData(JSONUtil.toJsonStr(news));
         //获取执行时间
-        LocalDateTime endTime = LocalDateTime.now();
-        apiLogs.setExecutionTime(endTime.minusNanos(startTime.getNano()).getNano());
-        apiLogs.setCreatedAt(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        apiLogsService.saveApiLogs(apiLogs);
+//        LocalDateTime endTime = LocalDateTime.now();
+//        apiLogs.setExecutionTime(endTime.minusNanos(startTime.getNano()).getNano());
+//        apiLogs.setCreatedAt(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//        apiLogsService.saveApiLogs(apiLogs);
         return news;
     }
 

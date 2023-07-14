@@ -8,7 +8,8 @@
 import { defineComponent, h, ref } from "vue";
 import { NIcon,NMenu,NButton } from "naive-ui";
 import {
-    StarHalfSharp as StarHalfSharp
+    StarHalfSharp as StarHalfSharp,
+    ArrowBack as ArrowBack
 } from "@vicons/ionicons5";
 
 function renderIcon(icon) {
@@ -28,6 +29,18 @@ const menuOptions = [
         ),
         key: "hear-the-wind-sing",
         icon: renderIcon(StarHalfSharp)
+    },
+    {
+        label: () => h(
+            "a",
+            {
+                href: "/",
+                target: "_blank",
+                rel: ""
+            },
+        ),
+        key: "hear-the-wind-sing",
+        icon: renderIcon(ArrowBack)
     }
 ];
 export default defineComponent({

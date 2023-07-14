@@ -12,7 +12,6 @@
 .mainCard{
     margin: 20px;
     width: 5cm;
-    height: 6cm;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     transition: all .3s;
 }

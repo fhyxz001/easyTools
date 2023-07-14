@@ -15,7 +15,7 @@ public class ApiLogsController {
     @Autowired
     private ApiLogsService apiLogsService;
 
-    //查询所有日志
+    //查询所有接口调用日志
     @RequestMapping("/getAllApiLogs")
     public ResponseEntity<List<ApiLogs>> getAllApiLogs(){
         return ResponseEntity.ok(apiLogsService.getAllApiLogs());

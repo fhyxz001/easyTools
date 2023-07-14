@@ -3,7 +3,7 @@
     <div v-for="item in itemList" :key="item">
         <NCard class="mainCard" :title="item.name" :hoverable="true" @click="jump(item.jump)">
             <template #cover>
-                <img src="../assets/logo.png" style="">
+                <img :src="getImageUrl(item.srcImg)"/>
             </template>
         </NCard>
     </div>
@@ -19,26 +19,38 @@ export default defineComponent({
         NButton,NCard,NSpace,NLayout,NLayoutHeader,NLayoutContent,NLayoutFooter,NLayoutSider
     },
     setup() {
+        const getImageUrl = (srcImg) =>{
+            return new URL('../assets/'+srcImg, import.meta.url).href
+        }
         return {
             itemList: [
                 {
                     name: '萌享解析',
                     desc: '用于方便转载的新闻解析',
-                    jump: '/EasyCopy'
+                    jump: '/EasyCopy',
+                    srcImg: 'nxd.png'
                 },
                 {
-                    name: '待续',
+                    name: 'waifu.pics',
                     desc: '',
-                    jump: '/Hearthstone'
+                    jump: '/GirlPrizeDraw',
+                    srcImg: 'sz.jpg'
+                },
+                {
+                    name: 'waifu.im',
+                    desc: '',
+                    jump: '/WaifuIm',
+                    srcImg: 'sit.png'
                 }
-            ]
+            ],
+            getImageUrl
         }
     },
     methods: {
         jump(url) {
             this.$router.push(url)
-        }
-    }
+        },
+    },
 })
 </script>
 <style>
