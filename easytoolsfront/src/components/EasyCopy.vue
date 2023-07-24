@@ -18,11 +18,11 @@
                     <!--                <div class="easyCopy-output"  v-if="title!=''" >-->
                     <div class="easyCopy-output"  >
                         <n-input type="textarea" :rows="2" v-model:value="title" placeholder="解析标题"/>
-                        <n-button type="primary" @click="copy(title)">复制</n-button>
+                        <n-button  @click="copy(title)">复制</n-button>
                     </div>
                     <div class="easyCopy-output">
                         <n-input type="textarea" :rows="2" v-model:value="content" placeholder="解析内容"/>
-                        <n-button type="primary" @click="copy(content)">复制</n-button>
+                        <n-button  @click="copy(content)">复制</n-button>
                     </div>
                 </div>
             </div>

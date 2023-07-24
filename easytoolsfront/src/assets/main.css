@@ -25,16 +25,18 @@
 }
 
 .card {
-    width: 270px;
-    height: 545px;
+    /*width: 270px;*/
+    /*height: 545px;*/
+    width: 200px;
+    height: 405px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     padding: 0 25px;
     perspective: 2500px;
-    transition: all 0.4s;
-    margin: 0 100px;
+    transition: all 0.9s;
+    margin: 0 10px;
 }
 
 .cover-image {

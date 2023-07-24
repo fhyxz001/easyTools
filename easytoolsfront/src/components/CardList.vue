@@ -1,23 +1,32 @@
 <template>
     <!--在这里写一个v-for循环，遍历存放卡片到首页展示 NCard-->
     <div v-for="item in itemList" :key="item">
-        <NCard class="mainCard" :title="item.name" :hoverable="true" @click="jump(item.jump)">
-            <template #cover>
-               <img :src="getImageUrl(item.srcImg)"/>
-            </template>
-        </NCard>
-    </div>
-    <div>
-        <div class="shell">
+<!--        <NCard class="mainCard" :title="item.name" :hoverable="true" @click="jump(item.jump)">-->
+<!--            <template #cover>-->
+<!--               <img :src="getImageUrl(item.srcImg)"/>-->
+<!--            </template>-->
+<!--        </NCard>-->
+        <div class="shell" @click="jump(item.jump)">
             <div class="card">
                 <div class="wrapper" >
                     <img src="../assets/test.png" alt="" class="cover-image"/>
                 </div>
                 <img src="../assets/title.png" alt="" class="title"/>
-                <img src="../assets/test2.png" alt="" class="character"/>
+                <img :src="getImageUrl(item.srcImg)" class="character"/>
             </div>
         </div>
     </div>
+<!--    <div>-->
+<!--        <div class="shell">-->
+<!--            <div class="card">-->
+<!--                <div class="wrapper" >-->
+<!--                    <img src="../assets/test.png" alt="" class="cover-image"/>-->
+<!--                </div>-->
+<!--                <img src="../assets/title.png" alt="" class="title"/>-->
+<!--                <img src="../assets/test2.png" alt="" class="character"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script>
