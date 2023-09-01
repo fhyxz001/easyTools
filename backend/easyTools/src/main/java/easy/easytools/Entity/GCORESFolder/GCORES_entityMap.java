@@ -1,4 +1,4 @@
-package easy.easytools.Entity;
+package easy.easytools.Entity.GCORESFolder;
 
 import lombok.Data;
 

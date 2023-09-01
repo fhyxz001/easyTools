@@ -1,4 +1,4 @@
-package easy.easytools.Entity;
+package easy.easytools.Entity.NewsFolder;
 
 import lombok.Data;
 

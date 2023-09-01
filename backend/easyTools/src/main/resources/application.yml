@@ -3,9 +3,3 @@ server:
 spring:
   datasource:
     url: jdbc:sqlite:/SQLite/easyToolsDatabase.db
-    database-platform: org.hibernate.dialect.SQLiteDialect
-    driver-class-name: org.sqlite.JDBC
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.SQLiteDialect

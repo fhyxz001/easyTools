@@ -4,11 +4,11 @@ package easy.easytools.Service;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import easy.easytools.Entity.*;
+import easy.easytools.Entity.GCORESFolder.*;
+import easy.easytools.Entity.NewsFolder.News;
+import easy.easytools.Entity.NewsFolder.NewsSources;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -35,18 +34,11 @@ public class BBSToolsServiceImpl implements BBSToolsService {
 
     @Autowired
     HttpServletRequest httpServletRequest;
-    @Autowired
-    ApiLogsService apiLogsService;
     @Override
     public News getNewsByUrl(String url) {
         LocalDateTime startTime = LocalDateTime.now();
         //获取调用接口人的ip地址
         String ip = httpServletRequest.getRemoteAddr();
-//        ApiLogs apiLogs = new ApiLogs();
-//        apiLogs.setCallerIp(ip);
-//        apiLogs.setInterfaceName("bbs/getNewsByUrl");
-//        apiLogs.setCallTime(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-//        apiLogs.setRequestParams(url);
         News news = new News();
         //开始处理数据
         try{
@@ -70,15 +62,7 @@ public class BBSToolsServiceImpl implements BBSToolsService {
                     throw new IllegalArgumentException("网站类型不合法");
             }
         }catch (Exception e){
-//            apiLogs.setResponseData("-1");
-//            apiLogs.setExceptionMessage(e.getMessage());
         }
-//        apiLogs.setResponseData(JSONUtil.toJsonStr(news));
-        //获取执行时间
-//        LocalDateTime endTime = LocalDateTime.now();
-//        apiLogs.setExecutionTime(endTime.minusNanos(startTime.getNano()).getNano());
-//        apiLogs.setCreatedAt(LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-//        apiLogsService.saveApiLogs(apiLogs);
         return news;
     }
 
@@ -221,10 +205,6 @@ public class BBSToolsServiceImpl implements BBSToolsService {
     }
 
     private void traditionalWebHandle(NewsSources newsSources, Document doc, String url, News news) {
-        //遍历allElements，找到其中有<div class="entry-content">的子元素，保留文本的格式，并且将其中的img标签的数据替换成以[img]开头，以[/img]结尾的字符串
-        //找到其中有entry-date的第一条数据，将其格式转换为[yyMMdd],赋予给data字符串
-        //找到其中有entry-title的参数，将其赋予给title字符串
-        //拼接data和title，赋予给newTitle字符串
         Elements allElements = doc.body().getAllElements();
         boolean firstDate = true;
         for (int i = 0; i < allElements.size(); i++) {
@@ -363,7 +343,4 @@ public class BBSToolsServiceImpl implements BBSToolsService {
         content = content.replace("]>", "]");
         return content;
     }
-
-
-
 }

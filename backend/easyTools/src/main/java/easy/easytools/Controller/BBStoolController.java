@@ -1,6 +1,6 @@
 package easy.easytools.Controller;
 
-import easy.easytools.Entity.News;
+import easy.easytools.Entity.NewsFolder.News;
 import easy.easytools.Service.BBSToolsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
