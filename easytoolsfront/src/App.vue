@@ -6,9 +6,9 @@
       <div class="Main">
           <router-view></router-view>
       </div>
-      <div class="Footer">
+      <!-- <div class="Footer">
           <Footer/>
-      </div>
+      </div> -->
   </div>
 </template>
 <script setup>

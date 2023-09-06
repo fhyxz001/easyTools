@@ -1,32 +1,21 @@
 <template>
     <!--在这里写一个v-for循环，遍历存放卡片到首页展示 NCard-->
     <div v-for="item in itemList" :key="item">
-<!--        <NCard class="mainCard" :title="item.name" :hoverable="true" @click="jump(item.jump)">-->
-<!--            <template #cover>-->
+        <NCard class="mainCard" :title="item.name" :hoverable="true" @click="jump(item.jump)">
+            <template #cover>
 <!--               <img :src="getImageUrl(item.srcImg)"/>-->
-<!--            </template>-->
-<!--        </NCard>-->
-        <div class="shell" @click="jump(item.jump)">
-            <div class="card">
-                <div class="wrapper" >
-                    <img src="../assets/test.png" alt="" class="cover-image"/>
-                </div>
-                <img src="../assets/title.png" alt="" class="title"/>
-                <img :src="getImageUrl(item.srcImg)" class="character"/>
-            </div>
-        </div>
-    </div>
-<!--    <div>-->
-<!--        <div class="shell">-->
+            </template>
+        </NCard>
+<!--        <div class="shell" @click="jump(item.jump)">-->
 <!--            <div class="card">-->
-<!--                <div class="wrapper" >-->
+<!--                <div class="wrapper" > &ndash;&gt;-->
 <!--                    <img src="../assets/test.png" alt="" class="cover-image"/>-->
 <!--                </div>-->
 <!--                <img src="../assets/title.png" alt="" class="title"/>-->
-<!--                <img src="../assets/test2.png" alt="" class="character"/>-->
+<!--                <img :src="getImageUrl(item.srcImg)" class="character"/>-->
 <!--            </div>-->
 <!--        </div>-->
-<!--    </div>-->
+    </div>
 </template>
 
 <script>
@@ -51,15 +40,21 @@ export default defineComponent({
                     srcImg: 'nxd.png'
                 },
                 {
-                    name: 'waifu.pics',
+                    name: '抽卡waifu.pics',
                     desc: '',
                     jump: '/GirlPrizeDraw',
                     srcImg: 'sz.jpg'
                 },
                 {
-                    name: 'waifu.im',
+                    name: '抽卡waifu.im',
                     desc: '',
                     jump: '/WaifuIm',
+                    srcImg: 'sit.png'
+                },
+                {
+                    name: '多点优选',
+                    desc: '',
+                    jump: '/MuchAddSelect',
                     srcImg: 'sit.png'
                 }
             ],
