@@ -21,27 +21,27 @@ const menuOptions = [
         label: () => h(
             "a",
             {
-                // href: "/",
-                // target: "_blank",
-                // rel: "noopenner noreferrer"
+                href: "/",
+                target: "_blank",
+                rel: "noopenner noreferrer"
             },
             "EasyTools~ 简单易用的工具箱"
         ),
         key: "hear-the-wind-sing",
         icon: renderIcon(StarHalfSharp)
     },
-    {
-        label: () => h(
-            "a",
-            {
-                href: "/",
-                target: "_blank",
-                rel: ""
-            },
-        ),
-        key: "hear-the-wind-sing",
-        icon: renderIcon(ArrowBack)
-    }
+    // {
+    //     label: () => h(
+    //         "a",
+    //         {
+    //             href: "",
+    //             target: "_blank",
+    //             rel: ""
+    //         },
+    //     ),
+    //     key: "hear-the-wind-sing",
+    //     icon: renderIcon(ArrowBack)
+    // }
 ];
 export default defineComponent({
     components: {

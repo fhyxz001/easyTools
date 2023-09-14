@@ -56,6 +56,12 @@ export default defineComponent({
                     desc: '',
                     jump: '/MuchAddSelect',
                     srcImg: 'sit.png'
+                },
+                {
+                    name: 'HearthStone',
+                    desc: '',
+                    jump: '/HearthStoneIMBA',
+                    srcImg: 'sit.png'
                 }
             ],
             getImageUrl
